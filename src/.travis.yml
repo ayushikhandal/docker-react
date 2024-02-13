@@ -1,0 +1,12 @@
+#required permission for sudo whenerver we use docker we need super user permission 
+sudo:required
+#it will run the docker
+services:
+   -docker
+#this are the commands that will run before our test   run
+before_install:
+  - docker build -t ayushikhandal/docker-react -f Dockerfile.dev .
+
+script:
+   - docker run -e CI =true ayushikhandal/docker-react npm run test -- --coverage
+
